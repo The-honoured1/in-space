@@ -23,14 +23,16 @@ func _draw() -> void:
 	if not is_instance_valid(player) or player.visible == false:
 		return
 		
-	var col = Color.WHITE
+	var txt_col = Color(0.0, 0.8, 1.0, 0.85) # High-tech HUD text color
+	var hp_col = Color(1.0, 0.25, 0.25, 1.0)  # Glowing neon red for hull
+	var shd_col = Color(0.0, 0.85, 1.0, 1.0) # Glowing neon cyan for shields
 	
 	# Draw Health Icons (Hearts/Shield shapes)
 	var hp_start = Vector2(0, 10)
 	var icon_spacing = 20.0
 	
 	# "HP" Label
-	draw_string(THEME_FONT, Vector2(0, 18), "HP:", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, col)
+	draw_string(THEME_FONT, Vector2(0, 18), "HP:", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, txt_col)
 		
 	var hearts_offset_x = 35.0
 	for i in range(player.max_hp):
@@ -49,14 +51,16 @@ func _draw() -> void:
 		
 		if i < player.current_hp:
 			# Filled
-			draw_colored_polygon(shape, col)
+			draw_colored_polygon(shape, hp_col)
+			# Small shine dot
+			draw_circle(pos + Vector2(-2, -3), 1.5, Color.WHITE)
 		else:
-			# Outline
-			draw_polyline(shape, col, 1.5, true)
+			# Dim empty outline
+			draw_polyline(shape, Color(1.0, 0.25, 0.25, 0.25), 1.5, true)
 			
 	# Draw Shield Icons (Hexagonal energy units)
 	var sh_start = Vector2(0, 36)
-	draw_string(THEME_FONT, Vector2(0, 44), "SHD:", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, col)
+	draw_string(THEME_FONT, Vector2(0, 44), "SHD:", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, txt_col)
 		
 	var shield_offset_x = 42.0
 	for i in range(player.max_shield):
@@ -73,8 +77,10 @@ func _draw() -> void:
 		
 		if i < player.current_shield:
 			# Filled (with a small hollow center to make it look high-tech)
-			draw_colored_polygon(shape, col)
-			draw_circle(pos + Vector2(0, 2), 2.5, Color.BLACK)
+			draw_colored_polygon(shape, shd_col)
+			draw_circle(pos + Vector2(0, 2), 2.5, Color(0.02, 0.05, 0.12, 1.0)) # matches card/panel background
+			# Tiny inner glow point
+			draw_circle(pos + Vector2(0, 2), 0.8, Color.WHITE)
 		else:
-			# Outline
-			draw_polyline(shape, col, 1.5, true)
+			# Dim empty outline
+			draw_polyline(shape, Color(0.0, 0.85, 1.0, 0.25), 1.5, true)

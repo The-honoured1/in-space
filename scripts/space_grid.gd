@@ -3,7 +3,7 @@ extends Node2D
 # space_grid.gd - Draws an infinite scrolling background grid to enhance movement depth.
 
 @export var grid_size: float = 120.0
-@export var grid_color: Color = Color(0.15, 0.15, 0.15, 1.0)
+@export var grid_color: Color = Color(0.0, 0.35, 0.5, 0.12)
 @export var line_width: float = 1.0
 
 var player: Node2D = null

@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scripts/ship_select.gd" id="2_script"]
 [ext_resource type="Script" path="res://scripts/ship_preview.gd" id="3_preview_script"]
 [ext_resource type="Script" path="res://scripts/crt_overlay.gd" id="4_crt_script"]
+[ext_resource type="Script" path="res://scripts/starfield.gd" id="5_starfield_script"]
 
 [node name="ShipSelect" type="Control"]
 layout_mode = 3
@@ -15,14 +16,18 @@ grow_vertical = 2
 theme = ExtResource("1_theme")
 script = ExtResource("2_script")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Starfield" type="Node2D" parent="."]
+script = ExtResource("5_starfield_script")
+star_count = 140
+
+[node name="Background" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
 
 [node name="BackBtn" type="Button" parent="."]
 layout_mode = 0

@@ -37,10 +37,18 @@ func _ready() -> void:
 	select_button.mouse_exited.connect(_on_hover_exited)
 	select_button.focus_entered.connect(_on_hover_entered)
 	select_button.focus_exited.connect(_on_hover_exited)
-
 func _on_icon_draw() -> void:
 	var center = icon_draw.size / 2.0
 	var col = Color.WHITE
+	
+	# Color code by upgrade category
+	match upgrade_id:
+		"fire_rate", "bullets_count", "damage", "pierce":
+			col = Color(1.0, 0.45, 0.15, 1.0) # Neon Orange/Red for combat
+		"shield_max", "shield_regen", "shield_nova":
+			col = Color(0.0, 0.85, 1.0, 1.0) # Neon Cyan/Blue for shields
+		"speed", "magnet":
+			col = Color(0.15, 1.0, 0.5, 1.0) # Neon Green/Emerald for speed/utility
 	
 	# Draw vector shapes based on upgrade type
 	match upgrade_id:
@@ -172,13 +180,21 @@ func _on_pressed() -> void:
 	GameManager.apply_upgrade(upgrade_id)
 
 func _on_hover_entered() -> void:
-	# Hover feedback: slightly scale up and add white modulate boost
-	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector2(1.05, 1.05), 0.1)
-	modulate = Color(1.2, 1.2, 1.2, 1.0) # glow effect
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(self, "scale", Vector2(1.05, 1.05), 0.15).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	
+	# Glow hue based on upgrade type
+	var glow_col = Color(1.2, 1.2, 1.2, 1.0)
+	match upgrade_id:
+		"fire_rate", "bullets_count", "damage", "pierce":
+			glow_col = Color(1.25, 0.95, 0.8, 1.0) # orange tint
+		"shield_max", "shield_regen", "shield_nova":
+			glow_col = Color(0.8, 1.1, 1.25, 1.0) # cyan tint
+		"speed", "magnet":
+			glow_col = Color(0.8, 1.25, 0.95, 1.0) # green tint
+	tween.tween_property(self, "modulate", glow_col, 0.15)
 
 func _on_hover_exited() -> void:
-	# Normal state
-	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1)
-	modulate = Color.WHITE
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.15).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.15)

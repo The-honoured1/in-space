@@ -5,36 +5,57 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_60qmb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dsnp2"]
-content_margin_left = 5.0
-content_margin_right = 5.0
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.01, 0.08, 0.16, 0.65)
+border_width_left = 2
+border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-corner_detail = 1
-anti_aliasing = false
+border_color = Color(0.0, 0.7, 0.9, 0.6)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12f15"]
-content_margin_left = 4.0
-content_margin_right = 4.0
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-anti_aliasing = false
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0, 0.85, 1.0, 0.45)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0, 0.95, 1.0, 1.0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0, 0.08, 0.18, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0, 0.9, 1.0, 1.0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0.0, 0.8, 1.0, 0.3)
+shadow_size = 6
+anti_aliasing = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20cor"]
 bg_color = Color(0, 0, 0, 1)
@@ -215,17 +236,19 @@ corner_radius_bottom_left = 2
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uofra"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-anti_aliasing = false
+bg_color = Color(0.02, 0.05, 0.12, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0, 0.8, 1.0, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.0, 0.8, 1.0, 0.15)
+shadow_size = 10
+anti_aliasing = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kfd0t"]
 bg_color = Color(0, 0, 0, 1)
@@ -257,21 +280,25 @@ anti_aliasing = false
 color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjle8"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-anti_aliasing = false
+bg_color = Color(0.01, 0.04, 0.08, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0, 0.5, 0.7, 0.5)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8i6f"]
-bg_color = Color(1, 1, 1, 1)
-anti_aliasing = false
+bg_color = Color(0.0, 0.95, 0.55, 1.0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+anti_aliasing = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tkshw"]
 bg_color = Color(0, 0, 0, 1)
@@ -380,6 +407,7 @@ Button/colors/icon_normal_color = Color(1, 1, 1, 1)
 Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
 Button/fonts/font = ExtResource("1_cl8dg")
 Button/styles/focus = SubResource("StyleBoxEmpty_60qmb")
+Button/styles/hover = SubResource("StyleBoxFlat_hover")
 Button/styles/normal = SubResource("StyleBoxFlat_dsnp2")
 Button/styles/pressed = SubResource("StyleBoxFlat_12f15")
 CheckBox/colors/font_color = Color(1, 1, 1, 1)
