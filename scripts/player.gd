@@ -3,6 +3,11 @@ extends CharacterBody2D
 signal health_changed(current_hp: int, max_hp: int)
 signal shield_changed(current_shield: int, max_shield: int)
 
+# --- Celestial Shield Boost ---
+var celestial_shield_active: bool = false
+var celestial_shield_timer: float = 0.0
+const CELESTIAL_SHIELD_DURATION: float = 8.0
+
 @export var bullet_scene: PackedScene
 
 # Base Stats
@@ -98,6 +103,13 @@ func _ready() -> void:
 	# Connect to upgrade events
 	GameManager.upgrade_selected.connect(_on_upgrade_selected)
 	
+	# Connect to CelestialSystem signals
+	var celestial = get_parent().get_node_or_null("CelestialSystem")
+	if celestial:
+		celestial.planet_entered.connect(_on_planet_entered)
+		celestial.blackhole_entered.connect(_on_blackhole_entered)
+		celestial.blackhole_exited.connect(_on_blackhole_exited)
+	
 	# Initial emit
 	emit_signal("health_changed", current_hp, max_hp)
 	emit_signal("shield_changed", current_shield, max_shield)
@@ -116,6 +128,12 @@ func _process(delta: float) -> void:
 	else:
 		visible = true
 		
+	# Celestial Shield boost timer
+	if celestial_shield_active:
+		celestial_shield_timer -= delta
+		if celestial_shield_timer <= 0.0:
+			celestial_shield_active = false
+			
 	# Shield recharge logic
 	time_since_last_hit += delta
 	var charge_cooldown = shield_regen_cooldown / (1.0 + 0.25 * GameManager.upgrades["shield_regen"]["level"])
@@ -185,12 +203,14 @@ func _physics_process(delta: float) -> void:
 		# Apply friction
 		velocity = velocity.lerp(Vector2.ZERO, friction * delta)
 		thruster_particles.emitting = false
+	
+	# --- Apply celestial gravity ---
+	var celestial = get_parent().get_node_or_null("CelestialSystem")
+	if celestial and celestial.has_method("get_gravity_acceleration"):
+		var grav = celestial.get_gravity_acceleration(global_position)
+		velocity += grav * delta
 		
 	move_and_slide()
-	
-	# Clamp player to a reasonable boundary around spawn point, but this is an infinite space.
-	# Parallax starfield makes it feel infinite.
-	# However, we should spawn enemies relative to player so player can keep flying in one direction.
 
 func _draw() -> void:
 	var points = PackedVector2Array()
@@ -309,6 +329,24 @@ func _draw() -> void:
 				_shield_circle_pts.append(Vector2(cos(angle), sin(angle)) * shield_radius)
 			_shield_pulse_last = shield_pulse
 		draw_polyline(_shield_circle_pts, Color.WHITE, 1.5, true)
+	
+	# Draw celestial shield boost indicator (glowing cyan ring)
+	if celestial_shield_active:
+		var time_ms = Time.get_ticks_msec()
+		var glow_alpha = 0.55 + 0.35 * sin(time_ms * 0.012)
+		var glow_radius = 36.0 + 4.0 * sin(time_ms * 0.009)
+		var seg = 32
+		var glow_pts = PackedVector2Array()
+		for k in range(seg + 1):
+			var ang = k * TAU / seg
+			glow_pts.append(Vector2(cos(ang), sin(ang)) * glow_radius)
+		# Outer halo
+		draw_polyline(glow_pts, Color(0.0, 1.0, 1.0, glow_alpha * 0.4), 8.0, true)
+		# Inner ring
+		draw_polyline(glow_pts, Color(0.0, 1.0, 1.0, glow_alpha), 2.0, true)
+		# Countdown arc (shows remaining time)
+		var fraction = celestial_shield_timer / CELESTIAL_SHIELD_DURATION
+		draw_arc(Vector2.ZERO, glow_radius + 10.0, -PI / 2.0, -PI / 2.0 + fraction * TAU, 48, Color(0.0, 1.0, 1.0, 0.9), 3.0)
 
 func find_closest_enemy_cached() -> Node2D:
 	var closest: Node2D = null
@@ -484,3 +522,43 @@ func _on_upgrade_selected(upgrade_id: String) -> void:
 func get_pickup_range() -> float:
 	var magnet_level = GameManager.upgrades["magnet"]["level"]
 	return base_pickup_range * (1.0 + 0.35 * magnet_level)
+
+# --- Celestial encounter callbacks ---
+func _on_planet_entered(_planet_index: int, planet_name: String) -> void:
+	# Planets grant a temporary shield boost
+	activate_celestial_shield()
+	_spawn_encounter_text("⬡ %s PROXIMITY — SHIELD BOOST!" % planet_name, Color(0.1, 1.0, 0.6))
+
+func _on_blackhole_entered() -> void:
+	trigger_screen_shake(0.5, 8.0)
+	_spawn_encounter_text("⚠ BLACK HOLE GRAVITY FIELD", Color(0.9, 0.2, 1.0))
+
+func _on_blackhole_exited() -> void:
+	_spawn_encounter_text("Escaped gravity well", Color(0.6, 0.6, 1.0))
+
+func activate_celestial_shield() -> void:
+	celestial_shield_active = true
+	celestial_shield_timer = CELESTIAL_SHIELD_DURATION
+	SoundManager.play_sfx("shield_up", 0.05)
+	queue_redraw()
+
+func collect_powerup(type_name: String) -> void:
+	if type_name == "shield_boost":
+		activate_celestial_shield()
+		_spawn_encounter_text("SHIELD BOOST (%ds)" % CELESTIAL_SHIELD_DURATION, Color(0.0, 1.0, 1.0))
+		SoundManager.play_sfx("powerup", 0.05)
+
+func _spawn_encounter_text(msg: String, color: Color) -> void:
+	var label = Label.new()
+	label.text = msg
+	label.add_theme_color_override("font_color", color)
+	label.add_theme_font_size_override("font_size", 11)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var parent = get_parent()
+	if parent:
+		parent.add_child(label)
+		label.global_position = global_position + Vector2(-80, -50)
+		var tween = label.create_tween()
+		tween.tween_property(label, "position:y", label.position.y - 40, 1.8)
+		tween.parallel().tween_property(label, "modulate:a", 0.0, 1.8)
+		tween.tween_callback(label.queue_free)

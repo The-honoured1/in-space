@@ -17,9 +17,17 @@ func _ready() -> void:
 	sfx_library["levelup"] = _generate_levelup()
 	sfx_library["click"] = _generate_click()
 	sfx_library["hover"] = _generate_hover()
+	sfx_library["blackhole_pull"] = _generate_blackhole_pull()
+	sfx_library["shield_up"] = _generate_shield_up()
+	sfx_library["powerup"] = _generate_powerup()
 
 func play_sfx(name: String, pitch_variance: float = 0.1) -> void:
-	return # Sounds muted — too harsh, will be replaced with polished audio later
+	# Keep harsh legacy SFX muted per user request
+	if name in ["pew", "explode", "impact", "levelup", "click", "hover"]:
+		return
+		
+	if not sfx_library.has(name):
+		return
 		
 	var stream = sfx_library[name]
 	var player = AudioStreamPlayer.new()
@@ -183,3 +191,53 @@ func _generate_hover() -> AudioStreamWAV:
 
 func clamped_byte(val: int) -> int:
 	return clampi(val, 0, 255)
+
+func _generate_blackhole_pull() -> AudioStreamWAV:
+	var bytes = PackedByteArray()
+	var duration = 1.0
+	var num_samples = int(sample_rate * duration)
+	for i in range(num_samples):
+		var t = float(i) / num_samples
+		# Low frequency deep rumble (sine waves modulated by LFO)
+		var wave = sin(t * 2.0 * PI * 45.0) * (0.7 + 0.3 * sin(t * 2.0 * PI * 6.0))
+		var noise = randf_range(-1.0, 1.0) * 0.05
+		var sample = wave + noise
+		var volume = 0.2
+		var envelope = sin(t * PI) # Fade in/out to loop smoothly
+		var val = int((sample * volume * envelope + 1.0) * 127.5)
+		bytes.append(clamped_byte(val))
+	return _create_wav_from_bytes(bytes)
+
+func _generate_shield_up() -> AudioStreamWAV:
+	var bytes = PackedByteArray()
+	var duration = 0.5
+	var num_samples = int(sample_rate * duration)
+	var phase = 0.0
+	for i in range(num_samples):
+		var t = float(i) / num_samples
+		# Smooth upward frequency sweep
+		var freq = lerp(220.0, 580.0, sin(t * PI * 0.5))
+		phase += (freq * 2.0 * PI) / sample_rate
+		var wave = sin(phase)
+		# Smooth science-fiction sweep envelope
+		var volume = 0.25 * sin(t * PI)
+		var val = int((wave * volume + 1.0) * 127.5)
+		bytes.append(clamped_byte(val))
+	return _create_wav_from_bytes(bytes)
+
+func _generate_powerup() -> AudioStreamWAV:
+	var bytes = PackedByteArray()
+	var duration = 0.4
+	var num_samples = int(sample_rate * duration)
+	var phase1 = 0.0
+	var phase2 = 0.0
+	for i in range(num_samples):
+		var t = float(i) / num_samples
+		# Dual sine waves (major third interval: C5 and E5) for bright harmony
+		phase1 += (523.25 * 2.0 * PI) / sample_rate
+		phase2 += (659.25 * 2.0 * PI) / sample_rate
+		var wave = (sin(phase1) + sin(phase2)) * 0.5
+		var volume = 0.2 * exp(-t * 4.0)
+		var val = int((wave * volume + 1.0) * 127.5)
+		bytes.append(clamped_byte(val))
+	return _create_wav_from_bytes(bytes)

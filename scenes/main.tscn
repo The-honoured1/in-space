@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://scripts/hud_stats_draw.gd" id="10_hud_stats_script"]
 [ext_resource type="Script" path="res://scripts/space_grid.gd" id="11_space_grid_script"]
 [ext_resource type="Script" path="res://scripts/crt_overlay.gd" id="12_crt_script"]
+[ext_resource type="Script" path="res://scripts/celestial_bodies.gd" id="13_celestial_bodies_script"]
+[ext_resource type="Script" path="res://scripts/powerup_manager.gd" id="14_powerup_manager_script"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_main_script")
@@ -31,6 +33,12 @@ enemy_scene = ExtResource("5_enemy_scene")
 
 [node name="Player" parent="." instance=ExtResource("6_player_scene")]
 position = Vector2(640, 360)
+[node name="CelestialSystem" type="Node2D" parent="."]
+script = ExtResource("13_celestial_bodies_script")
+
+[node name="PowerupManager" type="Node2D" parent="."]
+script = ExtResource("14_powerup_manager_script")
+
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

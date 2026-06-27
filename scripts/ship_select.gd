@@ -47,7 +47,7 @@ func _ready() -> void:
 	if back_btn:
 		back_btn.pressed.connect(_on_back_pressed)
 	
-	# Connect hover SFX
+	# Connect hover SFX and scale tweens
 	var _button_list = []
 	if fighter_btn:
 		_button_list.append(fighter_btn)
@@ -62,13 +62,23 @@ func _ready() -> void:
 	if back_btn:
 		_button_list.append(back_btn)
 	for btn in _button_list:
-		btn.mouse_entered.connect(_on_btn_hover)
-		btn.focus_entered.connect(_on_btn_hover)
+		btn.mouse_entered.connect(_on_btn_hover.bind(btn))
+		btn.focus_entered.connect(_on_btn_hover.bind(btn))
+		btn.mouse_exited.connect(_on_btn_unhovered.bind(btn))
+		btn.focus_exited.connect(_on_btn_unhovered.bind(btn))
 	# Start pre-draw animations (pulse and rotate slightly)
 	_animate_previews()
+	# Back button subtle pulse
+	_animate_back_button()
 
-func _on_btn_hover() -> void:
+func _on_btn_hover(btn: Button) -> void:
 	SoundManager.play_sfx("hover")
+	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(btn, "scale", Vector2(1.1, 1.1), 0.1)
+
+func _on_btn_unhovered(btn: Button) -> void:
+	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(btn, "scale", Vector2(1.0, 1.0), 0.1)
 
 func _on_ship_selected(ship_type: GameManager.ShipType) -> void:
 	GameManager.selected_ship = ship_type
