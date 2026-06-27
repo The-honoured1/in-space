@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bshstj0y5q3k1"]
+
+[ext_resource type="Script" path="res://scripts/xp_gem.gd" id="1_xp_gem_script"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gem"]
+radius = 10.0
+
+[node name="XpGem" type="Area2D" groups=["xp_gems"]]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_xp_gem_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gem")

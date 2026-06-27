@@ -1,0 +1,268 @@
+[gd_scene format=3 uid="uid://dmj6qy1nyl5h2"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main_script"]
+[ext_resource type="PackedScene" uid="uid://b5kmd31m4y80r" path="res://scenes/upgrade_card.tscn" id="2_upgrade_card_scene"]
+[ext_resource type="Script" path="res://scripts/starfield.gd" id="3_starfield_script"]
+[ext_resource type="Script" path="res://scripts/spawner.gd" id="4_spawner_script"]
+[ext_resource type="PackedScene" uid="uid://cx6iilb82tq5x" path="res://scenes/enemy.tscn" id="5_enemy_scene"]
+[ext_resource type="PackedScene" uid="uid://c1p8qy1nyl5h2" path="res://scenes/player.tscn" id="6_player_scene"]
+[ext_resource type="Theme" uid="uid://3b6jfloh1m1l" path="res://black_and_white.tres" id="7_theme"]
+[ext_resource type="PackedScene" uid="uid://cx6iilb82tq5y" path="res://scenes/virtual_joystick.tscn" id="8_joystick_scene"]
+[ext_resource type="Script" path="res://scripts/hud_frame.gd" id="9_hud_frame_script"]
+[ext_resource type="Script" path="res://scripts/hud_stats_draw.gd" id="10_hud_stats_script"]
+[ext_resource type="Script" path="res://scripts/space_grid.gd" id="11_space_grid_script"]
+[ext_resource type="Script" path="res://scripts/crt_overlay.gd" id="12_crt_script"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main_script")
+upgrade_card_scene = ExtResource("2_upgrade_card_scene")
+
+[node name="Starfield" type="Node2D" parent="."]
+script = ExtResource("3_starfield_script")
+star_count = 160
+
+[node name="SpaceGrid" type="Node2D" parent="."]
+script = ExtResource("11_space_grid_script")
+
+
+[node name="Spawner" type="Node" parent="."]
+script = ExtResource("4_spawner_script")
+enemy_scene = ExtResource("5_enemy_scene")
+
+[node name="Player" parent="." instance=ExtResource("6_player_scene")]
+position = Vector2(640, 360)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("7_theme")
+
+[node name="HudFrame" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("9_hud_frame_script")
+
+[node name="XPBar" type="ProgressBar" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 22.0
+grow_horizontal = 2
+show_percentage = false
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 28.0
+offset_right = 100.0
+offset_bottom = 60.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "02:00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LvlLabel" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 28.0
+offset_right = 150.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 18
+text = "LVL: 1"
+
+[node name="HudStatsDraw" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -215.0
+offset_top = 28.0
+offset_right = -15.0
+offset_bottom = 88.0
+grow_horizontal = 0
+script = ExtResource("10_hud_stats_script")
+
+[node name="VirtualJoystick" parent="CanvasLayer" instance=ExtResource("8_joystick_scene")]
+layout_mode = 3
+anchors_preset = 15
+
+[node name="LevelUpOverlay" type="ColorRect" parent="CanvasLayer"]
+process_mode = 2
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+theme = ExtResource("7_theme")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LevelUpOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -220.0
+offset_right = 400.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/LevelUpOverlay/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "=== UPGRADE AVAILABLE ==="
+horizontal_alignment = 1
+
+[node name="CardsContainer" type="HBoxContainer" parent="CanvasLayer/LevelUpOverlay/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="GameOverOverlay" type="ColorRect" parent="CanvasLayer"]
+process_mode = 2
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.862745)
+theme = ExtResource("7_theme")
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/GameOverOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -180.0
+offset_right = 200.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/GameOverOverlay/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/GameOverOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "MISSION FAILED"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/GameOverOverlay/Panel/VBox"]
+layout_mode = 2
+
+[node name="StatsLabel" type="Label" parent="CanvasLayer/GameOverOverlay/Panel/VBox"]
+layout_mode = 2
+text = "SURVIVED: 00:00:00
+LEVEL REACHED: 1"
+horizontal_alignment = 1
+
+[node name="RetryBtn" type="Button" parent="CanvasLayer/GameOverOverlay/Panel/VBox"]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "RETRY"
+
+[node name="QuitBtn" type="Button" parent="CanvasLayer/GameOverOverlay/Panel/VBox"]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "ABANDON MISSION"
+
+[node name="VictoryOverlay" type="ColorRect" parent="CanvasLayer"]
+process_mode = 2
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.862745)
+theme = ExtResource("7_theme")
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/VictoryOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -180.0
+offset_right = 200.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/VictoryOverlay/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/VictoryOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "DAWN ARRIVED"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/VictoryOverlay/Panel/VBox"]
+layout_mode = 2
+
+[node name="StatsLabel" type="Label" parent="CanvasLayer/VictoryOverlay/Panel/VBox"]
+layout_mode = 2
+text = "MISSION ACCOMPLISHED!
+YOU SURVIVED!"
+horizontal_alignment = 1
+
+[node name="RestartBtn" type="Button" parent="CanvasLayer/VictoryOverlay/Panel/VBox"]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "PLAY AGAIN"
+
+[node name="QuitBtn" type="Button" parent="CanvasLayer/VictoryOverlay/Panel/VBox"]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "RETURN TO HQ"
+
+[node name="CrtOverlay" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_crt_script")
+

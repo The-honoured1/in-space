@@ -1,0 +1,355 @@
+[gd_scene format=3 uid="uid://cx6iilb82tq50"]
+
+[ext_resource type="Theme" uid="uid://3b6jfloh1m1l" path="res://black_and_white.tres" id="1_theme"]
+[ext_resource type="Script" path="res://scripts/ship_select.gd" id="2_script"]
+[ext_resource type="Script" path="res://scripts/ship_preview.gd" id="3_preview_script"]
+[ext_resource type="Script" path="res://scripts/crt_overlay.gd" id="4_crt_script"]
+
+[node name="ShipSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_theme")
+script = ExtResource("2_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BackBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 120.0
+offset_bottom = 54.0
+text = "< BACK"
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Title" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "=== SELECT SPACE SHIP ==="
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBox" type="HBoxContainer" parent="VBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="FighterCard" type="PanelContainer" parent="VBox/HBox"]
+custom_minimum_size = Vector2(280, 440)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="VBox/HBox/FighterCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Name" type="Label" parent="VBox/HBox/FighterCard/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "FIGHTER"
+horizontal_alignment = 1
+
+[node name="PreviewContainer" type="Control" parent="VBox/HBox/FighterCard/VBox"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="FighterPreview" type="Control" parent="VBox/HBox/FighterCard/VBox/PreviewContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_preview_script")
+
+[node name="Stats" type="Label" parent="VBox/HBox/FighterCard/VBox"]
+custom_minimum_size = Vector2(240, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+text = "HP: [o o o o o]
+SHIELD: [x x x]
+SPEED: 240
+WEAPON: Dual blaster
+
+Standard all-rounder built for high stability in deeper sectors."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SelectBtn" type="Button" parent="VBox/HBox/FighterCard/VBox"]
+custom_minimum_size = Vector2(160, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "LAUNCH FIGHTER"
+
+[node name="InterceptorCard" type="PanelContainer" parent="VBox/HBox"]
+custom_minimum_size = Vector2(280, 440)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="VBox/HBox/InterceptorCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Name" type="Label" parent="VBox/HBox/InterceptorCard/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "INTERCEPTOR"
+horizontal_alignment = 1
+
+[node name="PreviewContainer" type="Control" parent="VBox/HBox/InterceptorCard/VBox"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="InterceptorPreview" type="Control" parent="VBox/HBox/InterceptorCard/VBox/PreviewContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_preview_script")
+ship_type = 1
+
+[node name="Stats" type="Label" parent="VBox/HBox/InterceptorCard/VBox"]
+custom_minimum_size = Vector2(240, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+text = "HP: [o o o o]
+SHIELD: [x x]
+SPEED: 310
+WEAPON: Rapid Blaster
+
+Fires 20% faster blasters. Lightweight alloy frame but fragile."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SelectBtn" type="Button" parent="VBox/HBox/InterceptorCard/VBox"]
+custom_minimum_size = Vector2(160, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "LAUNCH INTERCEPT"
+
+[node name="DreadnoughtCard" type="PanelContainer" parent="VBox/HBox"]
+custom_minimum_size = Vector2(280, 440)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="VBox/HBox/DreadnoughtCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Name" type="Label" parent="VBox/HBox/DreadnoughtCard/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "DREADNOUGHT"
+horizontal_alignment = 1
+
+[node name="PreviewContainer" type="Control" parent="VBox/HBox/DreadnoughtCard/VBox"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="DreadnoughtPreview" type="Control" parent="VBox/HBox/DreadnoughtCard/VBox/PreviewContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_preview_script")
+ship_type = 2
+
+[node name="Stats" type="Label" parent="VBox/HBox/DreadnoughtCard/VBox"]
+custom_minimum_size = Vector2(240, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+text = "HP: [o o o o o o o]
+SHIELD: [x x x x x]
+SPEED: 180
+WEAPON: Heavy Plasma
+
+Laser hits do 35% extra damage. Massive armor, but slow speed."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SelectBtn" type="Button" parent="VBox/HBox/DreadnoughtCard/VBox"]
+custom_minimum_size = Vector2(160, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "LAUNCH DREAD"
+
+[node name="GhostCard" type="PanelContainer" parent="VBox/ScrollContainer/HBox"]
+custom_minimum_size = Vector2(280, 440)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="VBox/ScrollContainer/HBox/GhostCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Name" type="Label" parent="VBox/ScrollContainer/HBox/GhostCard/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "GHOST"
+horizontal_alignment = 1
+
+[node name="PreviewContainer" type="Control" parent="VBox/ScrollContainer/HBox/GhostCard/VBox"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="GhostPreview" type="Control" parent="VBox/ScrollContainer/HBox/GhostCard/VBox/PreviewContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_preview_script")
+ship_type = 3
+
+[node name="Stats" type="Label" parent="VBox/ScrollContainer/HBox/GhostCard/VBox"]
+custom_minimum_size = Vector2(240, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+text = "HP: [o o]
+SHIELD: [x]
+SPEED: 360
+WEAPON: Sharp Laser
+
+Extremely fast, high damage, but almost zero defenses."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SelectBtn" type="Button" parent="VBox/ScrollContainer/HBox/GhostCard/VBox"]
+custom_minimum_size = Vector2(160, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "LAUNCH GHOST"
+
+[node name="TitanCard" type="PanelContainer" parent="VBox/ScrollContainer/HBox"]
+custom_minimum_size = Vector2(280, 440)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="VBox/ScrollContainer/HBox/TitanCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Name" type="Label" parent="VBox/ScrollContainer/HBox/TitanCard/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "TITAN"
+horizontal_alignment = 1
+
+[node name="PreviewContainer" type="Control" parent="VBox/ScrollContainer/HBox/TitanCard/VBox"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TitanPreview" type="Control" parent="VBox/ScrollContainer/HBox/TitanCard/VBox/PreviewContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_preview_script")
+ship_type = 4
+
+[node name="Stats" type="Label" parent="VBox/ScrollContainer/HBox/TitanCard/VBox"]
+custom_minimum_size = Vector2(240, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+text = "HP: [o o o o o o o o o o]
+SHIELD: [x x x x x x x]
+SPEED: 140
+WEAPON: Quad Cannon
+
+An absolute unit. Takes hits like a sponge."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SelectBtn" type="Button" parent="VBox/ScrollContainer/HBox/TitanCard/VBox"]
+custom_minimum_size = Vector2(160, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "LAUNCH TITAN"
+
+[node name="CrtOverlay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_crt_script")
+

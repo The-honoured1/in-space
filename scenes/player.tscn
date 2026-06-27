@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://c1p8qy1nyl5h2"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_player_script"]
+[ext_resource type="PackedScene" uid="uid://c5q3g34x1gml8" path="res://scenes/bullet.tscn" id="2_bullet_scene"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p3x2y"]
+radius = 12.0
+
+[sub_resource type="GDScript" id="GDScript_camera"]
+script/source = "extends Camera2D
+
+var shake_duration: float = 0.0
+var shake_amplitude: float = 0.0
+var original_offset: Vector2 = Vector2.ZERO
+
+func _ready() -> void:
+	original_offset = offset
+
+func _process(delta: float) -> void:
+	if shake_duration > 0.0:
+		shake_duration -= delta
+		offset = original_offset + Vector2(
+			randf_range(-shake_amplitude, shake_amplitude),
+			randf_range(-shake_amplitude, shake_amplitude)
+		)
+		if shake_duration <= 0.0:
+			offset = original_offset
+	else:
+		offset = original_offset
+
+func shake(duration: float, amplitude: float) -> void:
+	shake_duration = duration
+	shake_amplitude = amplitude
+"
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_player_script")
+bullet_scene = ExtResource("2_bullet_scene")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p3x2y")
+
+[node name="ThrusterParticles" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, 8)
+amount = 16
+lifetime = 0.4
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector2(0, 1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 80.0
+scale_amount_min = 1.5
+scale_amount_max = 3.0
+color = Color(1, 1, 1, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
+zoom = Vector2(1.2, 1.2)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+script = SubResource("GDScript_camera")
+
+[node name="ShieldArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ShieldArea"]
+shape = SubResource("CircleShape2D_p3x2y")
