@@ -69,7 +69,6 @@ func _ready() -> void:
 	# Start pre-draw animations (pulse and rotate slightly)
 	_animate_previews()
 	# Back button subtle pulse
-	_animate_back_button()
 
 func _on_btn_hover(btn: Button) -> void:
 	SoundManager.play_sfx("hover")

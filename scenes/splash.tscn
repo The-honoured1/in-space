@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c5q3g34x1gml0"]
 
 [ext_resource type="Theme" uid="uid://3b6jfloh1m1l" path="res://black_and_white.tres" id="1_theme"]
-[ext_resource type="Script" path="res://scripts/splash.gd" id="2_script"]
-[ext_resource type="Script" path="res://scripts/crt_overlay.gd" id="3_crt_script"]
+[ext_resource type="Script" uid="uid://dv7t1475rrpa2" path="res://scripts/splash.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://canukm8vnwks3" path="res://scripts/crt_overlay.gd" id="3_crt_script"]
 
-[node name="Splash" type="Control"]
+[node name="Splash" type="Control" unique_id=1072409382]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,7 @@ grow_vertical = 2
 theme = ExtResource("1_theme")
 script = ExtResource("2_script")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1904975898]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="TelemetryLabel" type="Label" parent="."]
+[node name="TelemetryLabel" type="Label" parent="." unique_id=259461497]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
@@ -35,7 +35,7 @@ text = "BOOT_ROM_V4.7...
 SYS: NOMINAL
 LOADING..."
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1173363030]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,35 +43,35 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBox" type="VBoxContainer" parent="CenterContainer" unique_id=1624170983]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/VBox"]
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBox" unique_id=889723659]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "IN-SPACE"
 horizontal_alignment = 1
 
-[node name="SubtitleLabel" type="Label" parent="CenterContainer/VBox"]
+[node name="SubtitleLabel" type="Label" parent="CenterContainer/VBox" unique_id=1557337528]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_font_sizes/font_size = 16
 text = "by Jiggy Games"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="CenterContainer/VBox"]
+[node name="Spacer" type="Control" parent="CenterContainer/VBox" unique_id=387565592]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="LoadingBar" type="ProgressBar" parent="CenterContainer/VBox"]
+[node name="LoadingBar" type="ProgressBar" parent="CenterContainer/VBox" unique_id=1605611630]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 show_percentage = false
 
-[node name="CrtOverlay" type="Control" parent="."]
+[node name="CrtOverlay" type="Control" parent="." unique_id=655451636]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -79,4 +79,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_crt_script")
-

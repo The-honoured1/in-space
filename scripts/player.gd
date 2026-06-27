@@ -332,9 +332,9 @@ func _draw() -> void:
 	
 	# Draw celestial shield boost indicator (glowing cyan ring)
 	if celestial_shield_active:
-		var time_ms = Time.get_ticks_msec()
-		var glow_alpha = 0.55 + 0.35 * sin(time_ms * 0.012)
-		var glow_radius = 36.0 + 4.0 * sin(time_ms * 0.009)
+		var time_mss = Time.get_ticks_msec()
+		var glow_alpha = 0.55 + 0.35 * sin(time_mss * 0.012)
+		var glow_radius = 36.0 + 4.0 * sin(time_mss * 0.009)
 		var seg = 32
 		var glow_pts = PackedVector2Array()
 		for k in range(seg + 1):

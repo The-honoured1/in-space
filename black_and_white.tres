@@ -1,78 +1,52 @@
 [gd_resource type="Theme" format=3 uid="uid://3b6jfloh1m1l"]
 
-[ext_resource type="FontFile" uid="uid://dajbnebl6nl0" path="res://Metamorphosis-DOWyW.ttf" id="1_cl8dg"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_60qmb"]
 
-# ─── BUTTON NORMAL ──────────────────────────────
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81hlo"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dsnp2"]
-content_margin_left = 20.0
-content_margin_top = 10.0
-content_margin_right = 20.0
-content_margin_bottom = 10.0
-bg_color = Color(0.04, 0.08, 0.14, 0.92)
-border_width_left = 3
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.0, 0.75, 1.0, 0.75)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_left = 0.0
-expand_margin_top = 0.0
-expand_margin_right = 0.0
-expand_margin_bottom = 0.0
-shadow_color = Color(0.0, 0.6, 1.0, 0.12)
-shadow_size = 4
-anti_aliasing = true
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
+anti_aliasing = false
 
-# ─── BUTTON PRESSED ─────────────────────────────
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12f15"]
-content_margin_left = 20.0
-content_margin_top = 10.0
-content_margin_right = 20.0
-content_margin_bottom = 10.0
-bg_color = Color(0.0, 0.55, 0.85, 0.95)
-border_width_left = 3
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.0, 0.9, 1.0, 1.0)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_top = 2.0
-expand_margin_bottom = -2.0
-shadow_color = Color(0.0, 0.8, 1.0, 0.35)
-shadow_size = 8
-anti_aliasing = true
-
-# ─── BUTTON HOVER ───────────────────────────────
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
-content_margin_left = 20.0
-content_margin_top = 10.0
-content_margin_right = 20.0
-content_margin_bottom = 10.0
-bg_color = Color(0.0, 0.12, 0.22, 0.97)
-border_width_left = 3
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.0, 0.9, 1.0, 1.0)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_left = 2.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
-shadow_color = Color(0.0, 0.8, 1.0, 0.45)
-shadow_size = 12
-anti_aliasing = true
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20cor"]
 bg_color = Color(0, 0, 0, 1)
@@ -253,19 +227,17 @@ corner_radius_bottom_left = 2
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uofra"]
-bg_color = Color(0.02, 0.05, 0.12, 0.85)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.0, 0.8, 1.0, 0.9)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-shadow_color = Color(0.0, 0.8, 1.0, 0.15)
-shadow_size = 10
-anti_aliasing = true
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kfd0t"]
 bg_color = Color(0, 0, 0, 1)
@@ -297,25 +269,30 @@ anti_aliasing = false
 color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjle8"]
-bg_color = Color(0.01, 0.04, 0.08, 0.85)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.0, 0.5, 0.7, 0.5)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-anti_aliasing = true
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8i6f"]
-bg_color = Color(0.0, 0.95, 0.55, 1.0)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-anti_aliasing = true
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwsdg"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tkshw"]
 bg_color = Color(0, 0, 0, 1)
@@ -369,6 +346,10 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8i6f"]
+bg_color = Color(1, 1, 1, 1)
+anti_aliasing = false
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbki4"]
 bg_color = Color(1, 1, 1, 1)
 border_width_left = 1
@@ -411,19 +392,19 @@ content_margin_right = 2.0
 bg_color = Color(1, 1, 1, 1)
 
 [resource]
-Button/colors/font_color = Color(0.85, 0.95, 1.0, 1)
+Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_focus_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/font_outline_color = Color(0, 0, 0, 0)
-Button/colors/font_pressed_color = Color(1, 1, 1, 1)
-Button/constants/outline_size = 0
-Button/fonts/font = ExtResource("1_cl8dg")
-Button/font_sizes/font_size = 16
-Button/styles/disabled = SubResource("StyleBoxFlat_dsnp2")
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
 Button/styles/focus = SubResource("StyleBoxEmpty_60qmb")
-Button/styles/hover = SubResource("StyleBoxFlat_hover")
-Button/styles/hover_pressed = SubResource("StyleBoxFlat_hover")
+Button/styles/hover = SubResource("StyleBoxFlat_81hlo")
 Button/styles/normal = SubResource("StyleBoxFlat_dsnp2")
 Button/styles/pressed = SubResource("StyleBoxFlat_12f15")
 CheckBox/colors/font_color = Color(1, 1, 1, 1)
@@ -501,7 +482,7 @@ PopupMenu/styles/labeled_separator_right = SubResource("StyleBoxLine_0bndt")
 PopupMenu/styles/panel = SubResource("StyleBoxFlat_0pyuf")
 PopupMenu/styles/separator = SubResource("StyleBoxLine_c1q06")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_fjle8")
-ProgressBar/styles/fill = SubResource("StyleBoxFlat_r8i6f")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_iwsdg")
 RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
 RichTextLabel/colors/selection_color = Color(1, 1, 1, 1)
 TabContainer/colors/drop_mark_color = Color(1, 1, 1, 1)
