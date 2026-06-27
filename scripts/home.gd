@@ -17,7 +17,7 @@ func _ready() -> void:
 	info_button.pressed.connect(_on_info_pressed)
 	settings_button.pressed.connect(_on_settings_pressed)
 	
-	# Connect hover/focus signals for retro selectors
+	# Connect hover/focus signals for retro selectors + scale pop
 	for btn in [play_button, info_button, settings_button]:
 		btn.mouse_entered.connect(_on_btn_hovered.bind(btn))
 		btn.focus_entered.connect(_on_btn_hovered.bind(btn))
@@ -27,6 +27,9 @@ func _ready() -> void:
 	_create_info_panel()
 	_create_settings_panel()
 	_create_selectors()
+	
+	# Animate the PLAY button with a continuous breathing glow
+	_animate_play_button()
 
 func _create_selectors() -> void:
 	selector_left = Label.new()
@@ -43,13 +46,23 @@ func _on_btn_hovered(btn: Button) -> void:
 	active_button = btn
 	selector_left.show()
 	selector_right.show()
-	SoundManager.play_sfx("hover")
+	# Scale pop on hover
+	var tw = btn.create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	tw.tween_property(btn, "scale", Vector2(1.04, 1.04), 0.15)
 
 func _on_btn_unhovered(btn: Button) -> void:
 	if active_button == btn:
 		active_button = null
 		selector_left.hide()
 		selector_right.hide()
+	var tw = btn.create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tw.tween_property(btn, "scale", Vector2(1.0, 1.0), 0.15)
+
+func _animate_play_button() -> void:
+	# Breathing glow: pulse modulate between slight cyan tint and neutral
+	var tween = play_button.create_tween().set_loops()
+	tween.tween_property(play_button, "modulate", Color(0.85, 1.0, 1.15, 1.0), 1.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(play_button, "modulate", Color(1.0, 1.0, 1.0, 1.0), 1.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 
 func _process(delta: float) -> void:
 	# Float the title container gently
@@ -72,9 +85,17 @@ func _process(delta: float) -> void:
 			selector_right.hide()
 
 func _on_play_pressed() -> void:
-	SoundManager.play_sfx("click")
-	# Load ship selection scene
-	get_tree().change_scene_to_file("res://scenes/ship_select.tscn")
+	# Punchy press: scale down, then fade out whole screen
+	var tw = create_tween().set_parallel(true)
+	tw.tween_property(play_button, "scale", Vector2(0.94, 0.94), 0.08)
+	tw.chain().tween_property(play_button, "scale", Vector2(1.0, 1.0), 0.1)
+	
+	var fade = create_tween()
+	fade.tween_interval(0.12)
+	fade.tween_property(self, "modulate:a", 0.0, 0.35)
+	fade.tween_callback(func():
+		get_tree().change_scene_to_file("res://scenes/ship_select.tscn")
+	)
 
 func _on_info_pressed() -> void:
 	SoundManager.play_sfx("click")

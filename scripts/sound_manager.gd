@@ -19,8 +19,7 @@ func _ready() -> void:
 	sfx_library["hover"] = _generate_hover()
 
 func play_sfx(name: String, pitch_variance: float = 0.1) -> void:
-	if not sfx_library.has(name):
-		return
+	return # Sounds muted — too harsh, will be replaced with polished audio later
 		
 	var stream = sfx_library[name]
 	var player = AudioStreamPlayer.new()

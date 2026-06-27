@@ -4,7 +4,6 @@
 [ext_resource type="Script" path="res://scripts/ship_select.gd" id="2_script"]
 [ext_resource type="Script" path="res://scripts/ship_preview.gd" id="3_preview_script"]
 [ext_resource type="Script" path="res://scripts/crt_overlay.gd" id="4_crt_script"]
-[ext_resource type="Script" path="res://scripts/starfield.gd" id="5_starfield_script"]
 
 [node name="ShipSelect" type="Control"]
 layout_mode = 3
@@ -16,18 +15,14 @@ grow_vertical = 2
 theme = ExtResource("1_theme")
 script = ExtResource("2_script")
 
-[node name="Starfield" type="Node2D" parent="."]
-script = ExtResource("5_starfield_script")
-star_count = 140
-
-[node name="Background" type="Control" parent="."]
-visible = false
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="BackBtn" type="Button" parent="."]
 layout_mode = 0
@@ -65,27 +60,27 @@ size_flags_vertical = 3
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="FighterCard" type="PanelContainer" parent="VBox/HBox"]
+[node name="FighterCard" type="PanelContainer" parent="VBox/ScrollContainer/HBox"]
 custom_minimum_size = Vector2(280, 440)
 layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="VBox/HBox/FighterCard"]
+[node name="VBox" type="VBoxContainer" parent="VBox/ScrollContainer/HBox/FighterCard"]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Name" type="Label" parent="VBox/HBox/FighterCard/VBox"]
+[node name="Name" type="Label" parent="VBox/ScrollContainer/HBox/FighterCard/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "FIGHTER"
 horizontal_alignment = 1
 
-[node name="PreviewContainer" type="Control" parent="VBox/HBox/FighterCard/VBox"]
+[node name="PreviewContainer" type="Control" parent="VBox/ScrollContainer/HBox/FighterCard/VBox"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="FighterPreview" type="Control" parent="VBox/HBox/FighterCard/VBox/PreviewContainer"]
+[node name="FighterPreview" type="Control" parent="VBox/ScrollContainer/HBox/FighterCard/VBox/PreviewContainer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,7 +95,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_preview_script")
 
-[node name="Stats" type="Label" parent="VBox/HBox/FighterCard/VBox"]
+[node name="Stats" type="Label" parent="VBox/ScrollContainer/HBox/FighterCard/VBox"]
 custom_minimum_size = Vector2(240, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -115,33 +110,33 @@ Standard all-rounder built for high stability in deeper sectors."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="SelectBtn" type="Button" parent="VBox/HBox/FighterCard/VBox"]
+[node name="SelectBtn" type="Button" parent="VBox/ScrollContainer/HBox/FighterCard/VBox"]
 custom_minimum_size = Vector2(160, 36)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "LAUNCH FIGHTER"
 
-[node name="InterceptorCard" type="PanelContainer" parent="VBox/HBox"]
+[node name="InterceptorCard" type="PanelContainer" parent="VBox/ScrollContainer/HBox"]
 custom_minimum_size = Vector2(280, 440)
 layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="VBox/HBox/InterceptorCard"]
+[node name="VBox" type="VBoxContainer" parent="VBox/ScrollContainer/HBox/InterceptorCard"]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Name" type="Label" parent="VBox/HBox/InterceptorCard/VBox"]
+[node name="Name" type="Label" parent="VBox/ScrollContainer/HBox/InterceptorCard/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "INTERCEPTOR"
 horizontal_alignment = 1
 
-[node name="PreviewContainer" type="Control" parent="VBox/HBox/InterceptorCard/VBox"]
+[node name="PreviewContainer" type="Control" parent="VBox/ScrollContainer/HBox/InterceptorCard/VBox"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="InterceptorPreview" type="Control" parent="VBox/HBox/InterceptorCard/VBox/PreviewContainer"]
+[node name="InterceptorPreview" type="Control" parent="VBox/ScrollContainer/HBox/InterceptorCard/VBox/PreviewContainer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -157,7 +152,7 @@ grow_vertical = 2
 script = ExtResource("3_preview_script")
 ship_type = 1
 
-[node name="Stats" type="Label" parent="VBox/HBox/InterceptorCard/VBox"]
+[node name="Stats" type="Label" parent="VBox/ScrollContainer/HBox/InterceptorCard/VBox"]
 custom_minimum_size = Vector2(240, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -172,33 +167,33 @@ Fires 20% faster blasters. Lightweight alloy frame but fragile."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="SelectBtn" type="Button" parent="VBox/HBox/InterceptorCard/VBox"]
+[node name="SelectBtn" type="Button" parent="VBox/ScrollContainer/HBox/InterceptorCard/VBox"]
 custom_minimum_size = Vector2(160, 36)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "LAUNCH INTERCEPT"
 
-[node name="DreadnoughtCard" type="PanelContainer" parent="VBox/HBox"]
+[node name="DreadnoughtCard" type="PanelContainer" parent="VBox/ScrollContainer/HBox"]
 custom_minimum_size = Vector2(280, 440)
 layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="VBox/HBox/DreadnoughtCard"]
+[node name="VBox" type="VBoxContainer" parent="VBox/ScrollContainer/HBox/DreadnoughtCard"]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Name" type="Label" parent="VBox/HBox/DreadnoughtCard/VBox"]
+[node name="Name" type="Label" parent="VBox/ScrollContainer/HBox/DreadnoughtCard/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "DREADNOUGHT"
 horizontal_alignment = 1
 
-[node name="PreviewContainer" type="Control" parent="VBox/HBox/DreadnoughtCard/VBox"]
+[node name="PreviewContainer" type="Control" parent="VBox/ScrollContainer/HBox/DreadnoughtCard/VBox"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="DreadnoughtPreview" type="Control" parent="VBox/HBox/DreadnoughtCard/VBox/PreviewContainer"]
+[node name="DreadnoughtPreview" type="Control" parent="VBox/ScrollContainer/HBox/DreadnoughtCard/VBox/PreviewContainer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -214,7 +209,7 @@ grow_vertical = 2
 script = ExtResource("3_preview_script")
 ship_type = 2
 
-[node name="Stats" type="Label" parent="VBox/HBox/DreadnoughtCard/VBox"]
+[node name="Stats" type="Label" parent="VBox/ScrollContainer/HBox/DreadnoughtCard/VBox"]
 custom_minimum_size = Vector2(240, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -229,7 +224,7 @@ Laser hits do 35% extra damage. Massive armor, but slow speed."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="SelectBtn" type="Button" parent="VBox/HBox/DreadnoughtCard/VBox"]
+[node name="SelectBtn" type="Button" parent="VBox/ScrollContainer/HBox/DreadnoughtCard/VBox"]
 custom_minimum_size = Vector2(160, 36)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -357,4 +352,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_crt_script")
-

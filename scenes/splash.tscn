@@ -3,7 +3,6 @@
 [ext_resource type="Theme" uid="uid://3b6jfloh1m1l" path="res://black_and_white.tres" id="1_theme"]
 [ext_resource type="Script" path="res://scripts/splash.gd" id="2_script"]
 [ext_resource type="Script" path="res://scripts/crt_overlay.gd" id="3_crt_script"]
-[ext_resource type="Texture2D" path="res://space_background.jpg" id="4_bg_texture"]
 
 [node name="Splash" type="Control"]
 layout_mode = 3
@@ -15,16 +14,14 @@ grow_vertical = 2
 theme = ExtResource("1_theme")
 script = ExtResource("2_script")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_bg_texture")
-expand_mode = 1
-stretch_mode = 6
+color = Color(0, 0, 0, 1)
 
 [node name="TelemetryLabel" type="Label" parent="."]
 layout_mode = 0

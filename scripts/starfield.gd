@@ -5,7 +5,6 @@ var stars: Array = []
 var screen_size: Vector2 = Vector2(1280, 720)
 var player: Node2D = null
 var _camera: Camera2D = null  # Cached to avoid per-frame lookup
-var bg_texture: Texture2D = preload("res://space_background.jpg")
 
 func _ready() -> void:
 	# Find player
@@ -68,10 +67,8 @@ func _process(delta: float) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	if bg_texture:
-		draw_texture_rect(bg_texture, Rect2(Vector2.ZERO, screen_size), false)
-	else:
-		draw_rect(Rect2(Vector2.ZERO, screen_size), Color.BLACK)
+	# Pure black base for clean vector space vibe
+	draw_rect(Rect2(Vector2.ZERO, screen_size), Color.BLACK)
 	
 	# Draw each star
 	for star in stars:
